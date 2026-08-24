@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Awesome DSH Skills — DeepSeek Harness 技能榜单</title>
+<meta name="description" content="Auto-discovered, verified and categorized skills for DeepSeek Harness (dsh). DeepSeek Harness 技能自动发现与实测榜单，每日更新。">
+<style>
+:root{
+  --bg:#f7f8fa; --card:#ffffff; --text:#1a2233; --muted:#5b6577; --border:#e3e7ee;
+  --accent:#2563eb; --accent-soft:#eaf1fe; --ok:#16a34a; --warn:#d97706;
+  --chip:#eef1f6; --chip-active:#2563eb; --chip-active-text:#fff;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0e1117; --card:#161b24; --text:#e6e9f0; --muted:#96a0b5; --border:#252c3a;
+    --accent:#5b8def; --accent-soft:#1b2740; --ok:#4ade80; --warn:#fbbf24;
+    --chip:#1e2531; --chip-active:#5b8def; --chip-active-text:#0e1117;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;padding:0 16px 64px}
+.wrap{max-width:980px;margin:0 auto}
+header{padding:40px 0 8px;text-align:center}
+header h1{font-size:1.9rem;letter-spacing:-.02em}
+header h1 span{color:var(--accent)}
+header p.tag{color:var(--muted);margin-top:6px}
+.stats{display:flex;gap:24px;justify-content:center;margin:18px 0 6px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat b{display:block;font-size:1.5rem;color:var(--accent)}
+.stat span{color:var(--muted);font-size:.82rem}
+.links{text-align:center;margin:10px 0 22px}
+.links a{color:var(--accent);text-decoration:none;margin:0 10px;font-size:.92rem}
+.links a:hover{text-decoration:underline}
+.controls{position:sticky;top:0;background:var(--bg);padding:12px 0;z-index:5;border-bottom:1px solid var(--border)}
+.searchrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+input[type=search]{flex:1;min-width:220px;padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:.95rem;outline:none}
+input[type=search]:focus{border-color:var(--accent)}
+select{padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:.9rem}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{padding:5px 12px;border-radius:999px;background:var(--chip);color:var(--text);font-size:.82rem;cursor:pointer;border:1px solid transparent;user-select:none}
+.chip:hover{border-color:var(--accent)}
+.chip.active{background:var(--chip-active);color:var(--chip-active-text)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:18px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;transition:transform .12s, box-shadow .12s}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.card .top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.card a.name{font-weight:600;color:var(--accent);text-decoration:none;word-break:break-all;font-size:.95rem}
+.card a.name:hover{text-decoration:underline}
+.card .stars{color:var(--muted);font-size:.82rem;white-space:nowrap}
+.card p{color:var(--muted);font-size:.86rem;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card .meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.badge{font-size:.72rem;padding:2px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.badge.ok{color:var(--ok);background:transparent;border:1px solid var(--ok)}
+.badge.partial{color:var(--warn);background:transparent;border:1px solid var(--warn)}
+.empty{text-align:center;color:var(--muted);padding:60px 0}
+footer{margin-top:48px;text-align:center;color:var(--muted);font-size:.82rem}
+footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Awesome <span>DSH</span> Skills</h1>
+  <p class="tag">DeepSeek Harness 技能自动发现与实测榜单 · auto-discovered &amp; verified skills for dsh</p>
+  <div class="stats">
+    <div class="stat"><b id="s-total">–</b><span>skills tracked</span></div>
+    <div class="stat"><b id="s-verified">–</b><span>✅ SKILL.md verified</span></div>
+    <div class="stat"><b id="s-updated">–</b><span>last updated</span></div>
+  </div>
+  <div class="links">
+    <a href="https://github.com/yzfly/awesome-dsh-skills">GitHub 仓库</a>
+    <a href="https://github.com/yzfly/awesome-dsh-skills#contributing">提交技能</a>
+    <a href="https://github.com/deepseek-ai/deepseek-harness">DeepSeek Harness</a>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="searchrow">
+    <input id="q" type="search" placeholder="搜索技能 / search skills…" autocomplete="off">
+    <select id="sort">
+      <option value="stars">按 Star 排序</option>
+      <option value="newest">最新创建</option>
+      <option value="updated">最近更新</option>
+    </select>
+    <select id="vfilter">
+      <option value="">全部状态</option>
+      <option value="yes">✅ 已验证</option>
+      <option value="partial">☑️ 部分验证</option>
+    </select>
+  </div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<div class="grid" id="grid"></div>
+<div class="empty" id="empty" hidden>没有匹配的技能 · no matching skills</div>
+
+<footer>
+  Data refreshed daily by GitHub Actions ·
+  <a href="https://github.com/yzfly/awesome-dsh-skills">yzfly/awesome-dsh-skills</a> · CC0-1.0
+</footer>
+</div>
+
+<script>
+let DATA=null, activeCat="";
+const $=id=>document.getElementById(id);
+
+fetch('data.json').then(r=>r.json()).then(d=>{
+  DATA=d;
+  $('s-total').textContent=d.skills.length;
+  $('s-verified').textContent=d.skills.filter(s=>s.verified==='yes').length;
+  $('s-updated').textContent=d.updated;
+  const counts={};
+  d.skills.forEach(s=>counts[s.category]=(counts[s.category]||0)+1);
+  const chips=$('chips');
+  const all=document.createElement('span');
+  all.className='chip active'; all.textContent='全部 All'; all.onclick=()=>{activeCat='';setActive(all);render();};
+  chips.appendChild(all);
+  Object.entries(d.categories).forEach(([key,names])=>{
+    if(!counts[key])return;
+    const c=document.createElement('span');
+    c.className='chip'; c.textContent=`${names.zh} ${counts[key]}`;
+    c.onclick=()=>{activeCat=key;setActive(c);render();};
+    chips.appendChild(c);
+  });
+  render();
+}).catch(()=>{$('empty').hidden=false;$('empty').textContent='数据加载失败 · failed to load data.json';});
+
+function setActive(el){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');}
+
+function render(){
+  const q=$('q').value.trim().toLowerCase();
+  const vf=$('vfilter').value;
+  const sort=$('sort').value;
+  let list=DATA.skills.filter(s=>
+    (!activeCat||s.category===activeCat)&&
+    (!vf||s.verified===vf)&&
+    (!q||(s.repo+' '+s.description+' '+(s.topics||[]).join(' ')).toLowerCase().includes(q))
+  );
+  if(sort==='stars')list.sort((a,b)=>b.stars-a.stars);
+  if(sort==='newest')list.sort((a,b)=>(b.created_at||'').localeCompare(a.created_at||''));
+  if(sort==='updated')list.sort((a,b)=>(b.pushed_at||'').localeCompare(a.pushed_at||''));
+  const grid=$('grid');
+  grid.innerHTML='';
+  $('empty').hidden=list.length>0;
+  const frag=document.createDocumentFragment();
+  list.forEach(s=>{
+    const card=document.createElement('div');card.className='card';
+    const vbadge=s.verified==='yes'?'<span class="badge ok">✅ verified</span>':s.verified==='partial'?'<span class="badge partial">☑️ partial</span>':'';
+    const catName=(DATA.categories[s.category]||{}).zh||s.category;
+    card.innerHTML=`
+      <div class="top">
+        <a class="name" target="_blank" rel="noopener" href="https://github.com/${s.repo}">${s.repo}</a>
+        <span class="stars">⭐ ${s.stars}</span>
+      </div>
+      <p>${escapeHtml(s.description||'(no description)')}</p>
+      <div class="meta"><span class="badge">${catName}</span>${vbadge}</div>`;
+    frag.appendChild(card);
+  });
+  grid.appendChild(frag);
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+$('q').addEventListener('input',render);
+$('sort').addEventListener('change',render);
+$('vfilter').addEventListener('change',render);
+</script>
+</body>
+</html>
