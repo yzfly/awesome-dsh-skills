@@ -124,6 +124,13 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
 .tags{display:flex;gap:6px;flex-wrap:wrap}
 .tag{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
 .tag.ok{background:color-mix(in srgb,var(--ok) 14%,transparent);color:var(--ok)}
+.tag.pick{background:linear-gradient(135deg,var(--accent),var(--accent-3));color:#fff}
+.chip.pick{border-color:color-mix(in srgb,var(--accent-3) 60%,transparent);color:var(--accent-3)}
+.chip.pick.on{background:linear-gradient(135deg,var(--accent-3),var(--accent));color:#fff}
+.edition{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:8px 14px 8px 10px;border-radius:12px;border:1px solid var(--border-strong);background:var(--surface);font-size:.85rem;font-weight:600;color:var(--text);transition:.15s}
+.edition:hover{border-color:var(--accent-3);transform:translateY(-1px)}
+.edition .k{padding:2px 8px;border-radius:6px;background:linear-gradient(135deg,var(--accent),var(--accent-3));color:#fff;font-size:.7rem;letter-spacing:.06em}
+.edition .arr{color:var(--text-3)}
 .tag.partial{background:color-mix(in srgb,var(--warn) 14%,transparent);color:var(--warn)}
 .time{font-size:.72rem;color:var(--text-3);font-family:var(--mono)}
 .empty{text-align:center;color:var(--text-3);padding:80px 0}
@@ -173,6 +180,7 @@ footer a{color:var(--text-2)} footer a:hover{color:var(--accent)}
   <span class="eyebrow"><span class="dot"></span><span data-i18n="eyebrow">每日自动爬取 · 实测校验 · 持续更新</span></span>
   <h1><span data-i18n="h1a">发现最好的</span> <span class="grad">DeepSeek Harness</span> <span data-i18n="h1b">技能</span></h1>
   <p class="lead" data-i18n="lead">从 GitHub 自动发现、校验 SKILL.md 并分类的 dsh 技能榜单。按分类、Star、校验状态即时筛选。</p>
+  <a class="edition" id="edition" hidden target="_blank" rel="noopener"><span class="k">✦ EDITION</span><span id="edition-title"></span><span class="arr">→</span></a>
   <div class="stats">
     <div class="stat"><b id="s-total">–</b><span data-i18n="st-total">技能仓库</span></div>
     <div class="stat ok"><b id="s-verified">–</b><span data-i18n="st-verified">✅ 校验通过</span></div>
@@ -228,7 +236,7 @@ const I18N={
       hint:"点击卡片跳转到 GitHub 仓库","empty-t":"没有匹配的技能","empty-s":"换个关键词或清除筛选试试",
       foot:"数据由 GitHub Actions 每日刷新 · 收录不构成安全背书，安装前请审查源码",
       ph:"搜索技能、仓库、关键词…",all:"全部",count:(n,t)=>`显示 <b>${n}</b> / ${t} 个技能`,more:n=>`加载更多（剩余 ${n}）`,
-      verified:"已验证",partial:"部分验证",nodesc:"（暂无简介）",updated:"更新于"},
+      verified:"已验证",partial:"部分验证",nodesc:"（暂无简介）",updated:"更新于",pick:"✦ 精选",picks:"✦ 本季精选",edition:t=>`${t} · 逐个审读的精选`},
   en:{submit:"Submit a skill",eyebrow:"Crawled daily · Verified · Always fresh",h1a:"Discover the best",h1b:"skills",
       lead:"Auto-discovered, SKILL.md-verified and categorized skills for dsh. Filter instantly by category, stars and verification status.",
       "st-total":"Skill repos","st-verified":"✅ Verified","st-stars":"Total stars","st-updated":"Last updated",
@@ -237,9 +245,9 @@ const I18N={
       hint:"Click a card to open the GitHub repo","empty-t":"No matching skills","empty-s":"Try another keyword or clear filters",
       foot:"Data refreshed daily by GitHub Actions · A listing is not a security endorsement — review the source before installing",
       ph:"Search skills, repos, keywords…",all:"All",count:(n,t)=>`Showing <b>${n}</b> of ${t} skills`,more:n=>`Load more (${n} left)`,
-      verified:"verified",partial:"partial",nodesc:"(no description)",updated:"updated"}
+      verified:"verified",partial:"partial",nodesc:"(no description)",updated:"updated",pick:"✦ Pick",picks:"✦ Editor's picks",edition:t=>`${t} · reviewed picks`}
 };
-let DATA=null, activeCat="", lang="zh", shown=0, list=[];
+let DATA=null, activeCat="", lang="zh", shown=0, list=[], picksOnly=false;
 const PAGE=48;
 try{lang=localStorage.getItem('dsh-lang')||(navigator.language.startsWith('zh')?'zh':'en');}catch(e){}
 
@@ -254,6 +262,7 @@ function applyLang(){
   const t=I18N[lang];
   document.querySelectorAll('[data-i18n]').forEach(el=>{const v=t[el.dataset.i18n];if(typeof v==='string')el.textContent=v;});
   $('q').placeholder=t.ph;
+  if(DATA&&DATA.edition)$('edition-title').textContent=t.edition(DATA.edition.title);
   document.querySelectorAll('#lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===lang));
   document.documentElement.lang=lang==='zh'?'zh-CN':'en';
   try{localStorage.setItem('dsh-lang',lang)}catch(e){}
@@ -269,6 +278,8 @@ fetch('data.json').then(r=>r.json()).then(d=>{
   $('s-updated').textContent=d.updated;
   const p=new URLSearchParams(location.search);
   if(p.get('q'))$('q').value=p.get('q'); if(p.get('cat'))activeCat=p.get('cat');
+  if(p.get('picks'))picksOnly=true;
+  if(d.edition){$('edition').hidden=false;$('edition').href=d.edition.url;}
   if(p.get('v'))$('vfilter').value=p.get('v'); if(p.get('sort'))$('sort').value=p.get('sort');
   applyLang();
 }).catch(()=>{$('grid').innerHTML='';$('empty').hidden=false;$('empty').innerHTML='<b>数据加载失败 · failed to load data.json</b>';});
@@ -280,17 +291,19 @@ function buildChips(){
   const chips=$('chips');chips.innerHTML='';
   const mk=(key,label,n)=>{const c=document.createElement('button');c.className='chip'+(activeCat===key?' on':'');c.innerHTML=`${esc(label)} <span class="n">${n}</span>`;c.onclick=()=>{activeCat=key;buildChips();render();};chips.appendChild(c);};
   mk('',I18N[lang].all,DATA.skills.length);
+  const np=DATA.skills.filter(s=>s.pick).length;
+  if(np){const c=document.createElement('button');c.className='chip pick'+(picksOnly?' on':'');c.innerHTML=`${I18N[lang].picks} <span class="n">${np}</span>`;c.onclick=()=>{picksOnly=!picksOnly;buildChips();render();};chips.appendChild(c);}
   Object.entries(DATA.categories).forEach(([k,n])=>{if(counts[k])mk(k,n[lang],counts[k]);});
 }
 
 function filter(){
   const q=$('q').value.trim().toLowerCase(), vf=$('vfilter').value, sort=$('sort').value;
-  list=DATA.skills.filter(s=>(!activeCat||s.category===activeCat)&&(!vf||s.verified===vf)&&
+  list=DATA.skills.filter(s=>(!picksOnly||s.pick)&&(!activeCat||s.category===activeCat)&&(!vf||s.verified===vf)&&
     (!q||(s.repo+' '+(s.description||'')+' '+(s.topics||[]).join(' ')).toLowerCase().includes(q)));
   const by={stars:(a,b)=>b.stars-a.stars,newest:(a,b)=>(b.created_at||'').localeCompare(a.created_at||''),
     updated:(a,b)=>(b.pushed_at||'').localeCompare(a.pushed_at||''),name:(a,b)=>a.repo.localeCompare(b.repo)};
   list.sort(by[sort]||by.stars);
-  const p=new URLSearchParams();if(q)p.set('q',q);if(activeCat)p.set('cat',activeCat);if(vf)p.set('v',vf);if(sort!=='stars')p.set('sort',sort);
+  const p=new URLSearchParams();if(q)p.set('q',q);if(activeCat)p.set('cat',activeCat);if(picksOnly)p.set('picks','1');if(vf)p.set('v',vf);if(sort!=='stars')p.set('sort',sort);
   history.replaceState(null,'',p.toString()?'?'+p:location.pathname);
 }
 
@@ -320,7 +333,7 @@ function card(s,i){
       <span class="stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.7 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg>${(s.stars||0).toLocaleString()}</span>
     </div>
     <p>${esc(s.description||t.nodesc)}</p>
-    <div class="foot"><div class="tags"><span class="tag">${esc(cat)}</span>${v}</div>${when}</div>`;
+    <div class="foot"><div class="tags">${s.pick?`<span class="tag pick">${t.pick}</span>`:''}<span class="tag">${esc(cat)}</span>${v}</div>${when}</div>`;
   return a;
 }
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}

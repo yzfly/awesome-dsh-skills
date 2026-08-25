@@ -1,11 +1,44 @@
 {
-  "CherryHQ/cherry-studio": {"hidden": true, "note": "AI studio app, not a dsh skill"},
-  "MemTensor/MemOS": {"hidden": true, "note": "memory platform, not a dsh skill"},
-  "YaoApp/yao": {"hidden": true, "note": "agent workspace app, not a dsh skill"},
-  "zhu1090093659/dsh-web-ui": {"hidden": true, "note": "GUI plugin ecosystem, not a skill"},
-  "Devin-AXIS/iPolloWork": {"hidden": true, "note": "agent workbench, not a skill"},
-  "Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report": {"hidden": true, "note": "benchmark report, not a skill"},
-  "firstintent/ccteam": {"hidden": true, "note": "multi-agent runner, not a skill"},
-  "Zhiyuan-Fan/Awesome-DeepSeek-Harness-Plugins": {"hidden": true, "note": "plugins list, out of scope"},
-  "Awesome-AI-Pedia/Awesome-AI-Pedia": {"hidden": true, "note": "generic AI resource list, out of scope"}
+  "CherryHQ/cherry-studio": {
+    "hidden": true,
+    "note": "AI studio app, not a dsh skill"
+  },
+  "MemTensor/MemOS": {
+    "hidden": true,
+    "note": "memory platform, not a dsh skill"
+  },
+  "YaoApp/yao": {
+    "hidden": true,
+    "note": "agent workspace app, not a dsh skill"
+  },
+  "zhu1090093659/dsh-web-ui": {
+    "hidden": true,
+    "note": "GUI plugin ecosystem, not a skill"
+  },
+  "Devin-AXIS/iPolloWork": {
+    "hidden": true,
+    "note": "agent workbench, not a skill"
+  },
+  "Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report": {
+    "hidden": true,
+    "note": "benchmark report, not a skill"
+  },
+  "firstintent/ccteam": {
+    "hidden": true,
+    "note": "multi-agent runner, not a skill"
+  },
+  "Zhiyuan-Fan/Awesome-DeepSeek-Harness-Plugins": {
+    "hidden": true,
+    "note": "plugins list, out of scope"
+  },
+  "Awesome-AI-Pedia/Awesome-AI-Pedia": {
+    "hidden": true,
+    "note": "generic AI resource list, out of scope"
+  },
+  "levi-qiao/dsh-plugin-longgraph": {
+    "category": "agents"
+  },
+  "Nagi-ovo/dsh-find-plugins": {
+    "category": "automation"
+  }
 }

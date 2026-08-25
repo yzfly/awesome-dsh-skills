@@ -1,0 +1,16 @@
+{
+  "id": "2026-q3",
+  "title": "2026 Q3 Edition",
+  "date": "2026-08-25",
+  "page": "editions/2026-q3.md",
+  "picks": [
+    "seed-forge/harness-ai-kit", "zimodzh/dsh-plugin-dev-skills", "zhaiyateng/dsh-design-skills", "alaliqing/claude-paper",
+    "xiehuan123/dsh-deepread", "linhut/gongwen-skill", "Viy1204/recruiting-copilot",
+    "tt-a1i/archify", "omdsh-dev/dsh-genui", "YuLaiZ/interactive-code-map",
+    "GanyuanRan/Aegis", "hyhmrright/brooks-lint", "liustack/modsearch", "linhay/harmony-next.skills",
+    "poplarity/dsh-science-workbench", "KCNyu/clawock", "titanwings/distilly",
+    "MonkeyUI-dev/vibe-to-ui", "superdesigndev/superdesign-skill", "MJorgin/dsh-media-skills",
+    "CheshireJCat/blender", "xiongjiamu/dsh-atomgit", "lhmd/dsh-promotion-toolkit", "Nagi-ovo/dsh-find-plugins",
+    "songyang0603/ds-spec-loop", "levi-qiao/dsh-plugin-longgraph", "WeirdSky924/agent-handoff-skill", "oil-oil/build-deepseek-harness-plugin"
+  ]
+}

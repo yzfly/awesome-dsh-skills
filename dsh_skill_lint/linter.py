@@ -42,9 +42,11 @@ DANGER_RES = [
     (re.compile(r"\bmkfs\.|\bdd\s+if=.*of=/dev/(sd|nvme|disk)"), "disk overwrite"),
 ]
 EVASION_RE = re.compile(
-    r"(do not|don'?t|never)\s+(tell|inform|show|ask|notify|warn)\s+(the\s+)?user|without\s+(the\s+)?user'?s?\s+(consent|confirmation|knowledge)"
+    r"(do not|don'?t|never)\s+(tell|inform|show|notify|warn|alert)\s+(the\s+)?user"
+    r"|(do not|don'?t|never)\s+ask\s+(the\s+)?user\s+(for\s+)?(permission|confirmation|consent|approval|before)"
+    r"|without\s+(the\s+)?user'?s?\s+(consent|confirmation|knowledge|approval|permission)"
     r"|ignore\s+(all\s+)?(previous|prior|safety|system)\s+(instructions|rules|guidelines)|disable\s+(safety|guardrails|sandbox)"
-    r"|不要(告诉|通知|询问)用户|绕过(安全|确认)",
+    r"|不要(告诉|通知|提醒)用户|未经用户(同意|确认)|绕过(安全|确认|权限)",
     re.I,
 )
 REF_RE = re.compile(r"(?<![\w/:.])((?:scripts|references|assets|templates|examples|docs|bin|lib|src)/[\w./-]+)")

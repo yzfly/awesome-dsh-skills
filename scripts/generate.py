@@ -50,12 +50,13 @@ def cell(text: str) -> str:
     return text.replace("|", "\\|")
 
 
-def line(e: dict) -> str:
+def line(e: dict, pick: bool = False) -> str:
     badge = BADGES.get(e["verified"], "")
     desc = cell(e["description"]) or "(no description)"
     star = f"{e['stars']}" if e["stars"] >= 5 else "–"
     name = e["repo"]
-    return f"| [{name}](https://github.com/{name}) | {star} | {badge} | {desc} |"
+    mark = "✦ " if pick else ""
+    return f"| {mark}[{name}](https://github.com/{name}) | {star} | {badge} | {desc} |"
 
 
 TABLE_HEAD_EN = "| Repo | ⭐ | ✓ | Description |\n|:--|--:|:-:|:--|"
@@ -107,13 +108,28 @@ def banner(total: int, verified: int, today: str) -> str:
 """
 
 
-def render(entries: list, zh: bool) -> str:
+def load_edition() -> dict | None:
+    p = ROOT / "data" / "edition.json"
+    return json.loads(p.read_text()) if p.exists() else None
+
+
+def render(entries: list, zh: bool, edition: dict | None = None) -> str:
     today = date.today().isoformat()
     total = len(entries)
     verified = sum(1 for e in entries if e["verified"] == "yes")
     by_cat: dict[str, list] = {}
     for e in entries:
         by_cat.setdefault(categorize(e), []).append(e)
+
+    picks = set(edition["picks"]) if edition else set()
+    edition_en = edition_zh = ""
+    if edition:
+        edition_en = f"""
+✦ **[{edition['title']}]({edition['page']})** — {len(picks)} skills read and reviewed one by one, with verdicts. Picks are marked ✦ below.
+"""
+        edition_zh = f"""
+✦ **[{edition['title']}]({edition['page']})** — {len(picks)} 个技能逐个审读并给出点评。入选项在下方以 ✦ 标记。
+"""
 
     toc, body = [], []
     for key, en_name, zh_name, _kw in CATEGORIES:
@@ -127,7 +143,7 @@ def render(entries: list, zh: bool) -> str:
         toc.append(f"- [{name}](#{anchor}) ({len(items)})")
         body.append(f"\n### {name}\n")
         body.append(TABLE_HEAD_ZH if zh else TABLE_HEAD_EN)
-        body.extend(line(e) for e in sorted(items, key=lambda x: -x["stars"]))
+        body.extend(line(e, e["repo"] in picks) for e in sorted(items, key=lambda x: -x["stars"]))
 
     if zh:
         header = f"""<div align="center">
@@ -150,7 +166,7 @@ def render(entries: list, zh: bool) -> str:
 **{total}** 个技能仓库 · **{verified}** 个通过 SKILL.md 校验 · 每日自动更新（最后更新 {today}）
 
 🔎 **可搜索网站：{SITE}** — 按分类、star、校验状态筛选。
-
+{edition_zh}
 ## 收录与校验
 
 - 候选来自 GitHub topic（`dsh-skill` 等）与全文搜索的每日爬取，欢迎 PR 自荐（见 [CONTRIBUTING](CONTRIBUTING.md)）。
@@ -183,7 +199,7 @@ def render(entries: list, zh: bool) -> str:
 **{total}** skill repos tracked · **{verified}** passed SKILL.md validation · updated daily (last: {today})
 
 🔎 **Searchable site: {SITE}** — filter by category, stars, and verification status.
-
+{edition_en}
 ## How entries get here
 
 - Candidates are crawled daily from GitHub topics (`dsh-skill`, …) and full-text search; PRs welcome ([CONTRIBUTING](CONTRIBUTING.md)).
@@ -238,13 +254,16 @@ def main() -> None:
 
     verified = sum(1 for e in entries if e["verified"] == "yes")
     (ROOT / "docs" / "brand" / "banner.svg").write_text(banner(len(entries), verified, date.today().isoformat()))
-    (ROOT / "README.md").write_text(render(entries, zh=False))
-    (ROOT / "README.zh.md").write_text(render(entries, zh=True))
+    edition = load_edition()
+    picks = set(edition["picks"]) if edition else set()
+    (ROOT / "README.md").write_text(render(entries, zh=False, edition=edition))
+    (ROOT / "README.zh.md").write_text(render(entries, zh=True, edition=edition))
 
     cat_names = {k: {"en": en, "zh": zh} for k, en, zh, _ in CATEGORIES}
     site_data = {
         "updated": date.today().isoformat(),
         "categories": cat_names,
+        "edition": {"id": edition["id"], "title": edition["title"], "url": f"{REPO_URL}/blob/main/{edition['page']}"} if edition else None,
         "skills": [
             {
                 "repo": e["repo"],
@@ -255,6 +274,7 @@ def main() -> None:
                 "topics": e.get("topics", []),
                 "created_at": e.get("created_at", ""),
                 "pushed_at": e.get("pushed_at", ""),
+                "pick": e["repo"] in picks,
             }
             for e in entries
         ],

@@ -93,6 +93,16 @@ Skills drive an agent that acts on the user's machine. A listed skill MUST NOT s
 - **Score** — `100 − 25×errors − 6×warnings − 1×infos`, floor 0. Any MUST violation caps the score at 59. Grades: **A** ≥ 90 · **B** ≥ 75 · **C** ≥ 60 · **D** below.
 - The [Awesome DSH Skills](https://code.jiangshu.ai/awesome-dsh-skills) listing marks a repo ✅ when at least one skill is conformant.
 
-## 7. Changelog
+## 7. Proposed for 0.2
+
+Observed in the wild (2026 Q3 review) and under consideration. Not enforced yet; the linter warns on them only as unknown keys (DSK010w).
+
+- `whenToUse` / `trigger` / `do-not-trigger` — explicit trigger and anti-trigger clauses as first-class fields, instead of prose inside `description`.
+- `tags` — free-form list for discovery.
+- `official` — boolean; a skill shipped by the host or a platform vendor.
+
+Open a PR against this section with one real skill that uses the field.
+
+## 8. Changelog
 
 - **0.1** (2026-08-25) — initial draft.
