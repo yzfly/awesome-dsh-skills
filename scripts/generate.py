@@ -62,6 +62,51 @@ TABLE_HEAD_EN = "| Repo | ⭐ | ✓ | Description |\n|:--|--:|:-:|:--|"
 TABLE_HEAD_ZH = "| 仓库 | ⭐ | ✓ | 简介 |\n|:--|--:|:-:|:--|"
 
 
+MARK_PATH = "M12 3.2l2.3 5.3 5.3 2.3-5.3 2.3L12 18.4l-2.3-5.3-5.3-2.3 5.3-2.3z"
+FONT = "Inter,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif"
+
+
+def banner(total: int, verified: int, today: str) -> str:
+    """README hero — 1200x300, dark, brand gradient, live counts."""
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-label="Awesome DSH Skills — {total} skills, {verified} verified">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c8cff"/><stop offset=".55" stop-color="#38d4ff"/><stop offset="1" stop-color="#c084fc"/></linearGradient>
+    <radialGradient id="a1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(160 40) scale(420)"><stop offset="0" stop-color="#7c8cff" stop-opacity=".55"/><stop offset="1" stop-color="#7c8cff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="a2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1050 260) scale(460)"><stop offset="0" stop-color="#38d4ff" stop-opacity=".45"/><stop offset="1" stop-color="#38d4ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="a3" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(700 -40) scale(380)"><stop offset="0" stop-color="#c084fc" stop-opacity=".4"/><stop offset="1" stop-color="#c084fc" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".05"/></pattern>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <mask id="m"><rect width="1200" height="300" fill="url(#fade)"/></mask>
+    <clipPath id="c"><rect width="1200" height="300" rx="24"/></clipPath>
+  </defs>
+  <g clip-path="url(#c)">
+    <rect width="1200" height="300" fill="#070a12"/>
+    <rect width="1200" height="300" fill="url(#a1)"/>
+    <rect width="1200" height="300" fill="url(#a2)"/>
+    <rect width="1200" height="300" fill="url(#a3)"/>
+    <rect width="1200" height="300" fill="url(#grid)" mask="url(#m)"/>
+    <rect x=".5" y=".5" width="1199" height="299" rx="23.5" fill="none" stroke="#fff" stroke-opacity=".1"/>
+  </g>
+  <rect x="72" y="76" width="64" height="64" rx="17" fill="url(#g)"/>
+  <g transform="translate(72 76) scale(2.6667)"><path d="{MARK_PATH}" fill="#fff"/></g>
+  <text x="160" y="126" font-family="{FONT}" font-size="54" font-weight="800" letter-spacing="-2.2" fill="#eef1f8">Awesome <tspan fill="url(#g)">DSH</tspan> Skills</text>
+  <text x="74" y="184" font-family="{FONT}" font-size="19" fill="#aab3c7">Auto-discovered, verified and categorized skills for DeepSeek Harness.</text>
+  <g font-family="{FONT}" font-size="13" font-weight="600" letter-spacing="1.2">
+    <rect x="72" y="214" width="150" height="40" rx="10" fill="#fff" fill-opacity=".04" stroke="#fff" stroke-opacity=".1"/>
+    <text x="88" y="240" fill="#eef1f8" font-size="18" font-weight="800" letter-spacing="-.5">{total}</text>
+    <text x="{88 + 12 * len(str(total)) + 6}" y="239" fill="#6f7a93">SKILLS</text>
+    <rect x="234" y="214" width="166" height="40" rx="10" fill="#fff" fill-opacity=".04" stroke="#fff" stroke-opacity=".1"/>
+    <text x="250" y="240" fill="#34d399" font-size="18" font-weight="800" letter-spacing="-.5">{verified}</text>
+    <text x="{250 + 12 * len(str(verified)) + 6}" y="239" fill="#6f7a93">VERIFIED</text>
+    <rect x="412" y="214" width="200" height="40" rx="10" fill="#fff" fill-opacity=".04" stroke="#fff" stroke-opacity=".1"/>
+    <text x="428" y="239" fill="#6f7a93">UPDATED</text>
+    <text x="502" y="240" fill="#eef1f8" font-size="15" font-weight="700" letter-spacing="0">{today}</text>
+  </g>
+  <text x="1128" y="246" text-anchor="end" font-family="{FONT}" font-size="13" font-weight="600" letter-spacing="1.2" fill="#6f7a93">code.jiangshu.ai/awesome-dsh-skills</text>
+</svg>
+"""
+
+
 def render(entries: list, zh: bool) -> str:
     today = date.today().isoformat()
     total = len(entries)
@@ -85,9 +130,20 @@ def render(entries: list, zh: bool) -> str:
         body.extend(line(e) for e in sorted(items, key=lambda x: -x["stars"]))
 
     if zh:
-        header = f"""# Awesome DSH Skills [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+        header = f"""<div align="center">
 
-[English](README.md) | 中文
+<a href="{SITE}"><img src="docs/brand/banner.svg" alt="Awesome DSH Skills" width="100%"></a>
+
+<br>
+
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+[![Skills](https://img.shields.io/endpoint?url={SITE}/count.json&style=flat-square&color=7c8cff&labelColor=0c1020)]({SITE})
+[![Daily update](https://img.shields.io/github/actions/workflow/status/yzfly/awesome-dsh-skills/update.yml?style=flat-square&label=daily%20update&labelColor=0c1020)](https://github.com/yzfly/awesome-dsh-skills/actions)
+[![License CC0](https://img.shields.io/badge/license-CC0--1.0-38d4ff?style=flat-square&labelColor=0c1020)](LICENSE)
+
+[English](README.md) · **中文**
+
+</div>
 
 > [DeepSeek Harness (dsh)](https://github.com/deepseek-ai/deepseek-harness) 技能（Skill）自动发现与实测榜单。
 
@@ -106,9 +162,20 @@ def render(entries: list, zh: bool) -> str:
 
 """
     else:
-        header = f"""# Awesome DSH Skills [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+        header = f"""<div align="center">
 
-English | [中文](README.zh.md)
+<a href="{SITE}"><img src="docs/brand/banner.svg" alt="Awesome DSH Skills" width="100%"></a>
+
+<br>
+
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+[![Skills](https://img.shields.io/endpoint?url={SITE}/count.json&style=flat-square&color=7c8cff&labelColor=0c1020)]({SITE})
+[![Daily update](https://img.shields.io/github/actions/workflow/status/yzfly/awesome-dsh-skills/update.yml?style=flat-square&label=daily%20update&labelColor=0c1020)](https://github.com/yzfly/awesome-dsh-skills/actions)
+[![License CC0](https://img.shields.io/badge/license-CC0--1.0-38d4ff?style=flat-square&labelColor=0c1020)](LICENSE)
+
+**English** · [中文](README.zh.md)
+
+</div>
 
 > Auto-discovered & verified skills for [DeepSeek Harness (dsh)](https://github.com/deepseek-ai/deepseek-harness).
 
@@ -136,11 +203,13 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Add the `dsh-skill` topic to your repo a
 
 ## Badge
 
-Listed here? Add the badge to your README:
+Listed here? Add the badge to your README — [![Listed on Awesome DSH Skills]({SITE}/badge.svg)]({REPO_URL})
 
 ```markdown
-[![Awesome DSH Skills]({SITE}/badge.svg)]({REPO_URL})
+[![Listed on Awesome DSH Skills]({SITE}/badge.svg)]({REPO_URL})
 ```
+
+Brand assets and usage: [BRAND.md](BRAND.md).
 
 ## License
 
@@ -157,6 +226,8 @@ def main() -> None:
         e.update(overrides.get(e["repo"], {}))
     entries = [e for e in entries if not e.get("hidden")]
 
+    verified = sum(1 for e in entries if e["verified"] == "yes")
+    (ROOT / "docs" / "brand" / "banner.svg").write_text(banner(len(entries), verified, date.today().isoformat()))
     (ROOT / "README.md").write_text(render(entries, zh=False))
     (ROOT / "README.zh.md").write_text(render(entries, zh=True))
 
@@ -180,7 +251,7 @@ def main() -> None:
     }
     (ROOT / "docs" / "data.json").write_text(json.dumps(site_data, ensure_ascii=False) + "\n")
     (ROOT / "docs" / "count.json").write_text(json.dumps({
-        "schemaVersion": 1, "label": "dsh skills", "message": str(len(entries)), "color": "blue",
+        "schemaVersion": 1, "label": "dsh skills", "message": str(len(entries)), "color": "7c8cff",
     }) + "\n")
     print(f"generated README.md / README.zh.md / docs data for {len(entries)} entries")
 

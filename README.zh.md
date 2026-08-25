@@ -1,6 +1,17 @@
-# Awesome DSH Skills [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+<div align="center">
 
-[English](README.md) | 中文
+<a href="https://code.jiangshu.ai/awesome-dsh-skills"><img src="docs/brand/banner.svg" alt="Awesome DSH Skills" width="100%"></a>
+
+<br>
+
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+[![Skills](https://img.shields.io/endpoint?url=https://code.jiangshu.ai/awesome-dsh-skills/count.json&style=flat-square&color=7c8cff&labelColor=0c1020)](https://code.jiangshu.ai/awesome-dsh-skills)
+[![Daily update](https://img.shields.io/github/actions/workflow/status/yzfly/awesome-dsh-skills/update.yml?style=flat-square&label=daily%20update&labelColor=0c1020)](https://github.com/yzfly/awesome-dsh-skills/actions)
+[![License CC0](https://img.shields.io/badge/license-CC0--1.0-38d4ff?style=flat-square&labelColor=0c1020)](LICENSE)
+
+[English](README.md) · **中文**
+
+</div>
 
 > [DeepSeek Harness (dsh)](https://github.com/deepseek-ai/deepseek-harness) 技能（Skill）自动发现与实测榜单。
 
@@ -805,11 +816,13 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Add the `dsh-skill` topic to your repo a
 
 ## Badge
 
-Listed here? Add the badge to your README:
+Listed here? Add the badge to your README — [![Listed on Awesome DSH Skills](https://code.jiangshu.ai/awesome-dsh-skills/badge.svg)](https://github.com/yzfly/awesome-dsh-skills)
 
 ```markdown
-[![Awesome DSH Skills](https://code.jiangshu.ai/awesome-dsh-skills/badge.svg)](https://github.com/yzfly/awesome-dsh-skills)
+[![Listed on Awesome DSH Skills](https://code.jiangshu.ai/awesome-dsh-skills/badge.svg)](https://github.com/yzfly/awesome-dsh-skills)
 ```
+
+Brand assets and usage: [BRAND.md](BRAND.md).
 
 ## License
 

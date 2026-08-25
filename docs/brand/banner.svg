@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-label="Awesome DSH Skills — 713 skills, 385 verified">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c8cff"/><stop offset=".55" stop-color="#38d4ff"/><stop offset="1" stop-color="#c084fc"/></linearGradient>
+    <radialGradient id="a1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(160 40) scale(420)"><stop offset="0" stop-color="#7c8cff" stop-opacity=".55"/><stop offset="1" stop-color="#7c8cff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="a2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1050 260) scale(460)"><stop offset="0" stop-color="#38d4ff" stop-opacity=".45"/><stop offset="1" stop-color="#38d4ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="a3" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(700 -40) scale(380)"><stop offset="0" stop-color="#c084fc" stop-opacity=".4"/><stop offset="1" stop-color="#c084fc" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".05"/></pattern>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <mask id="m"><rect width="1200" height="300" fill="url(#fade)"/></mask>
+    <clipPath id="c"><rect width="1200" height="300" rx="24"/></clipPath>
+  </defs>
+  <g clip-path="url(#c)">
+    <rect width="1200" height="300" fill="#070a12"/>
+    <rect width="1200" height="300" fill="url(#a1)"/>
+    <rect width="1200" height="300" fill="url(#a2)"/>
+    <rect width="1200" height="300" fill="url(#a3)"/>
+    <rect width="1200" height="300" fill="url(#grid)" mask="url(#m)"/>
+    <rect x=".5" y=".5" width="1199" height="299" rx="23.5" fill="none" stroke="#fff" stroke-opacity=".1"/>
+  </g>
+  <rect x="72" y="76" width="64" height="64" rx="17" fill="url(#g)"/>
+  <g transform="translate(72 76) scale(2.6667)"><path d="M12 3.2l2.3 5.3 5.3 2.3-5.3 2.3L12 18.4l-2.3-5.3-5.3-2.3 5.3-2.3z" fill="#fff"/></g>
+  <text x="160" y="126" font-family="Inter,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="54" font-weight="800" letter-spacing="-2.2" fill="#eef1f8">Awesome <tspan fill="url(#g)">DSH</tspan> Skills</text>
+  <text x="74" y="184" font-family="Inter,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#aab3c7">Auto-discovered, verified and categorized skills for DeepSeek Harness.</text>
+  <g font-family="Inter,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="1.2">
+    <rect x="72" y="214" width="150" height="40" rx="10" fill="#fff" fill-opacity=".04" stroke="#fff" stroke-opacity=".1"/>
+    <text x="88" y="240" fill="#eef1f8" font-size="18" font-weight="800" letter-spacing="-.5">713</text>
+    <text x="130" y="239" fill="#6f7a93">SKILLS</text>
+    <rect x="234" y="214" width="166" height="40" rx="10" fill="#fff" fill-opacity=".04" stroke="#fff" stroke-opacity=".1"/>
+    <text x="250" y="240" fill="#34d399" font-size="18" font-weight="800" letter-spacing="-.5">385</text>
+    <text x="292" y="239" fill="#6f7a93">VERIFIED</text>
+    <rect x="412" y="214" width="200" height="40" rx="10" fill="#fff" fill-opacity=".04" stroke="#fff" stroke-opacity=".1"/>
+    <text x="428" y="239" fill="#6f7a93">UPDATED</text>
+    <text x="502" y="240" fill="#eef1f8" font-size="15" font-weight="700" letter-spacing="0">2026-08-25</text>
+  </g>
+  <text x="1128" y="246" text-anchor="end" font-family="Inter,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="1.2" fill="#6f7a93">code.jiangshu.ai/awesome-dsh-skills</text>
+</svg>

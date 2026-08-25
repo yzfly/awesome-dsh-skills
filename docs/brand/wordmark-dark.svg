@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 64" width="420" height="64" role="img" aria-label="Awesome DSH Skills">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c8cff"/><stop offset=".55" stop-color="#38d4ff"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs>
+  <rect x="8" y="8" width="48" height="48" rx="13" fill="url(#g)"/>
+  <g transform="translate(8 8) scale(2)"><path d="M12 3.2l2.3 5.3 5.3 2.3-5.3 2.3L12 18.4l-2.3-5.3-5.3-2.3 5.3-2.3z" fill="#fff"/></g>
+  <text x="72" y="36" font-family="Inter,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="27" font-weight="800" letter-spacing="-0.8" fill="#eef1f8">Awesome <tspan fill="url(#g)">DSH</tspan> Skills</text>
+  <text x="73" y="54" font-family="Inter,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11" font-weight="600" letter-spacing="1.6" fill="#7f8aa3">CURATED · VERIFIED · DAILY</text>
+</svg>
