@@ -30,7 +30,7 @@ BADGES = {
     "no": "",
 }
 
-SITE = "https://yzfly.github.io/awesome-dsh-skills"
+SITE = "https://code.jiangshu.ai/awesome-dsh-skills"
 REPO_URL = "https://github.com/yzfly/awesome-dsh-skills"
 
 
@@ -44,14 +44,22 @@ def categorize(entry: dict) -> str:
     return "other"
 
 
+def cell(text: str) -> str:
+    """Make free text safe inside a markdown table cell."""
+    text = re.sub(r"\s+", " ", text or "").strip()
+    return text.replace("|", "\\|")
+
+
 def line(e: dict) -> str:
     badge = BADGES.get(e["verified"], "")
-    desc = e["description"] or "(no description)"
-    desc = re.sub(r"\s+", " ", desc).strip()
-    star = f"⭐{e['stars']}" if e["stars"] >= 5 else ""
-    bits = " ".join(x for x in (badge, star) if x)
-    suffix = f" {bits}" if bits else ""
-    return f"- [{e['repo']}](https://github.com/{e['repo']}){suffix} - {desc}"
+    desc = cell(e["description"]) or "(no description)"
+    star = f"{e['stars']}" if e["stars"] >= 5 else "–"
+    name = e["repo"]
+    return f"| [{name}](https://github.com/{name}) | {star} | {badge} | {desc} |"
+
+
+TABLE_HEAD_EN = "| Repo | ⭐ | ✓ | Description |\n|:--|--:|:-:|:--|"
+TABLE_HEAD_ZH = "| 仓库 | ⭐ | ✓ | 简介 |\n|:--|--:|:-:|:--|"
 
 
 def render(entries: list, zh: bool) -> str:
@@ -73,6 +81,7 @@ def render(entries: list, zh: bool) -> str:
         anchor = re.sub(r"[^\w一-鿿 -]", "", name).lower().replace(" ", "-")
         toc.append(f"- [{name}](#{anchor}) ({len(items)})")
         body.append(f"\n### {name}\n")
+        body.append(TABLE_HEAD_ZH if zh else TABLE_HEAD_EN)
         body.extend(line(e) for e in sorted(items, key=lambda x: -x["stars"]))
 
     if zh:

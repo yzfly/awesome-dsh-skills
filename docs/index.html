@@ -1,168 +1,330 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Awesome DSH Skills — DeepSeek Harness 技能榜单</title>
 <meta name="description" content="Auto-discovered, verified and categorized skills for DeepSeek Harness (dsh). DeepSeek Harness 技能自动发现与实测榜单，每日更新。">
+<meta property="og:title" content="Awesome DSH Skills">
+<meta property="og:description" content="Auto-discovered & verified skills for DeepSeek Harness. 每日更新、可搜索、可筛选。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Crect width=%2724%27 height=%2724%27 rx=%276%27 fill=%27%237c8cff%27/%3E%3Cpath d=%27M12 4l2.2 5 5.3 2.2-5.3 2.2L12 18.6l-2.2-5.2L4.5 11.2l5.3-2.2z%27 fill=%27white%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f7f8fa; --card:#ffffff; --text:#1a2233; --muted:#5b6577; --border:#e3e7ee;
-  --accent:#2563eb; --accent-soft:#eaf1fe; --ok:#16a34a; --warn:#d97706;
-  --chip:#eef1f6; --chip-active:#2563eb; --chip-active-text:#fff;
+  --bg:#070a12; --bg-2:#0c1020; --surface:rgba(255,255,255,.035); --surface-hover:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.08); --border-strong:rgba(255,255,255,.16);
+  --text:#eef1f8; --text-2:#aab3c7; --text-3:#6f7a93;
+  --accent:#7c8cff; --accent-2:#38d4ff; --accent-3:#c084fc;
+  --ok:#34d399; --warn:#fbbf24;
+  --glow:0 0 0 1px rgba(124,140,255,.35), 0 20px 60px -20px rgba(124,140,255,.45);
+  --shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 10px 40px -20px rgba(0,0,0,.8);
+  --radius:18px; --font:"Inter",-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 }
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#0e1117; --card:#161b24; --text:#e6e9f0; --muted:#96a0b5; --border:#252c3a;
-    --accent:#5b8def; --accent-soft:#1b2740; --ok:#4ade80; --warn:#fbbf24;
-    --chip:#1e2531; --chip-active:#5b8def; --chip-active-text:#0e1117;
-  }
+[data-theme="light"]{
+  --bg:#f6f7fb; --bg-2:#ffffff; --surface:rgba(255,255,255,.75); --surface-hover:#ffffff;
+  --border:rgba(15,23,42,.08); --border-strong:rgba(15,23,42,.16);
+  --text:#0f172a; --text-2:#475569; --text-3:#8a94a8;
+  --accent:#4f5fe8; --accent-2:#0ea5e9; --accent-3:#a855f7;
+  --ok:#059669; --warn:#d97706;
+  --glow:0 0 0 1px rgba(79,95,232,.25), 0 24px 60px -24px rgba(79,95,232,.35);
+  --shadow:0 1px 2px rgba(15,23,42,.04), 0 10px 30px -20px rgba(15,23,42,.25);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;padding:0 16px 64px}
-.wrap{max-width:980px;margin:0 auto}
-header{padding:40px 0 8px;text-align:center}
-header h1{font-size:1.9rem;letter-spacing:-.02em}
-header h1 span{color:var(--accent)}
-header p.tag{color:var(--muted);margin-top:6px}
-.stats{display:flex;gap:24px;justify-content:center;margin:18px 0 6px;flex-wrap:wrap}
-.stat{text-align:center}
-.stat b{display:block;font-size:1.5rem;color:var(--accent)}
-.stat span{color:var(--muted);font-size:.82rem}
-.links{text-align:center;margin:10px 0 22px}
-.links a{color:var(--accent);text-decoration:none;margin:0 10px;font-size:.92rem}
-.links a:hover{text-decoration:underline}
-.controls{position:sticky;top:0;background:var(--bg);padding:12px 0;z-index:5;border-bottom:1px solid var(--border)}
-.searchrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-input[type=search]{flex:1;min-width:220px;padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:.95rem;outline:none}
-input[type=search]:focus{border-color:var(--accent)}
-select{padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:.9rem}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:15px/1.6 var(--font);-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+/* ---------- ambient background ---------- */
+.aurora{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.aurora::before,.aurora::after{content:"";position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;animation:drift 22s ease-in-out infinite alternate}
+.aurora::before{width:60vw;height:60vw;left:-15vw;top:-25vw;background:radial-gradient(circle at 30% 30%,var(--accent),transparent 60%)}
+.aurora::after{width:50vw;height:50vw;right:-15vw;top:-10vw;background:radial-gradient(circle at 60% 40%,var(--accent-2),transparent 60%);animation-delay:-8s}
+.aurora .p{position:absolute;width:45vw;height:45vw;left:35vw;top:30vh;border-radius:50%;filter:blur(110px);opacity:.35;background:radial-gradient(circle,var(--accent-3),transparent 60%);animation:drift 28s ease-in-out infinite alternate-reverse}
+[data-theme="light"] .aurora::before,[data-theme="light"] .aurora::after,[data-theme="light"] .aurora .p{opacity:.22}
+.aurora .grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 50% 0%,#000 20%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 20%,transparent 70%)}
+@keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(6vw,4vh,0) scale(1.12)}}
+@media (prefers-reduced-motion:reduce){.aurora::before,.aurora::after,.aurora .p{animation:none}}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
+.brand .logo{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;box-shadow:0 8px 20px -8px var(--accent)}
+.brand .logo svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a,.icon-btn{padding:8px 12px;border-radius:10px;color:var(--text-2);font-size:.9rem;font-weight:500;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.nav-links a:hover,.icon-btn:hover{background:var(--surface-hover);color:var(--text)}
+.icon-btn{padding:8px;border:1px solid var(--border)}
+.icon-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:10px;overflow:hidden;font-size:.8rem;font-weight:600}
+.seg button{padding:6px 10px;color:var(--text-3)}
+.seg button.on{background:var(--surface-hover);color:var(--text)}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 0 34px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;border:1px solid var(--border-strong);background:var(--surface);font-size:.78rem;font-weight:600;color:var(--text-2);letter-spacing:.02em;backdrop-filter:blur(10px)}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(52,211,153,.18);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(52,211,153,.18)}50%{box-shadow:0 0 0 7px rgba(52,211,153,.05)}}
+.hero h1{margin-top:22px;font-size:clamp(2.3rem,6vw,4.2rem);line-height:1.05;letter-spacing:-.035em;font-weight:800}
+.hero h1 .grad{background:linear-gradient(92deg,var(--accent) 0%,var(--accent-2) 50%,var(--accent-3) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{margin:18px auto 0;max-width:620px;color:var(--text-2);font-size:1.05rem}
+.stats{display:flex;justify-content:center;gap:12px;margin-top:34px;flex-wrap:wrap}
+.stat{min-width:150px;padding:14px 22px;border-radius:14px;border:1px solid var(--border);background:var(--surface);backdrop-filter:blur(12px);text-align:left;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:1.7rem;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat span{font-size:.75rem;color:var(--text-3);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+.stat.ok b{color:var(--ok)}
+
+/* ---------- toolbar ---------- */
+.toolbar{position:sticky;top:12px;z-index:20;margin-top:28px;padding:12px;border-radius:var(--radius);border:1px solid var(--border-strong);background:color-mix(in srgb,var(--bg-2) 72%,transparent);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:var(--shadow)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search{flex:1;min-width:240px;position:relative}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--text-3);fill:none;stroke-width:2;stroke-linecap:round}
+.search input{width:100%;padding:12px 88px 12px 40px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:.95rem;outline:none;transition:.15s}
+.search input::placeholder{color:var(--text-3)}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+.search kbd{position:absolute;right:12px;top:50%;transform:translateY(-50%);font:600 .7rem var(--mono);color:var(--text-3);border:1px solid var(--border);border-radius:6px;padding:2px 7px;background:var(--bg-2)}
+.select{position:relative}
+.select select{appearance:none;-webkit-appearance:none;padding:11px 36px 11px 14px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:.88rem;font-weight:500;outline:none;cursor:pointer}
+.select select:focus{border-color:var(--accent)}
+.select::after{content:"";position:absolute;right:14px;top:50%;width:7px;height:7px;border-right:2px solid var(--text-3);border-bottom:2px solid var(--text-3);transform:translateY(-70%) rotate(45deg);pointer-events:none}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.chip{padding:5px 12px;border-radius:999px;background:var(--chip);color:var(--text);font-size:.82rem;cursor:pointer;border:1px solid transparent;user-select:none}
-.chip:hover{border-color:var(--accent)}
-.chip.active{background:var(--chip-active);color:var(--chip-active-text)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:18px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;transition:transform .12s, box-shadow .12s}
-.card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08)}
-.card .top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
-.card a.name{font-weight:600;color:var(--accent);text-decoration:none;word-break:break-all;font-size:.95rem}
-.card a.name:hover{text-decoration:underline}
-.card .stars{color:var(--muted);font-size:.82rem;white-space:nowrap}
-.card p{color:var(--muted);font-size:.86rem;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.card .meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.badge{font-size:.72rem;padding:2px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
-.badge.ok{color:var(--ok);background:transparent;border:1px solid var(--ok)}
-.badge.partial{color:var(--warn);background:transparent;border:1px solid var(--warn)}
-.empty{text-align:center;color:var(--muted);padding:60px 0}
-footer{margin-top:48px;text-align:center;color:var(--muted);font-size:.82rem}
-footer a{color:var(--accent)}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text-2);font-size:.82rem;font-weight:500;transition:.15s;white-space:nowrap}
+.chip:hover{border-color:var(--border-strong);color:var(--text);background:var(--surface-hover)}
+.chip.on{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 8px 18px -10px var(--accent)}
+.chip .n{font-family:var(--mono);font-size:.72rem;opacity:.75}
+
+/* ---------- results ---------- */
+.meta-row{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px;color:var(--text-3);font-size:.85rem}
+.meta-row b{color:var(--text);font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.card{position:relative;display:flex;flex-direction:column;gap:10px;padding:18px 18px 16px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);box-shadow:var(--shadow);transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s,border-color .2s;animation:rise .35s both}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,var(--accent),var(--accent-2),var(--accent-3));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .2s;pointer-events:none}
+.card:hover{transform:translateY(-3px);box-shadow:var(--glow);border-color:transparent;background:var(--surface-hover)}
+.card:hover::before{opacity:1}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card .head{display:flex;align-items:flex-start;gap:10px}
+.avatar{width:36px;height:36px;border-radius:10px;flex:none;background:var(--bg-2);border:1px solid var(--border);object-fit:cover}
+.card .title{min-width:0;flex:1}
+.card .owner{font-size:.74rem;color:var(--text-3);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .name{display:block;font-weight:700;letter-spacing:-.01em;font-size:1rem;line-height:1.3;word-break:break-word}
+.card:hover .name{color:var(--accent)}
+.stars{flex:none;display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:.78rem;color:var(--text-2);padding:4px 9px;border-radius:8px;background:var(--bg-2);border:1px solid var(--border)}
+.stars svg{width:12px;height:12px;fill:var(--warn)}
+.card p{color:var(--text-2);font-size:.86rem;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card .foot{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:2px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
+.tag.ok{background:color-mix(in srgb,var(--ok) 14%,transparent);color:var(--ok)}
+.tag.partial{background:color-mix(in srgb,var(--warn) 14%,transparent);color:var(--warn)}
+.time{font-size:.72rem;color:var(--text-3);font-family:var(--mono)}
+.empty{text-align:center;color:var(--text-3);padding:80px 0}
+.empty b{display:block;font-size:1.2rem;color:var(--text);margin-bottom:6px}
+.more{display:flex;justify-content:center;margin:28px 0 8px}
+.more button{padding:11px 24px;border-radius:12px;border:1px solid var(--border-strong);background:var(--surface);font-weight:600;font-size:.9rem;transition:.15s}
+.more button:hover{background:var(--surface-hover);border-color:var(--accent)}
+.skel{height:150px;border-radius:var(--radius);background:linear-gradient(90deg,var(--surface) 25%,var(--surface-hover) 50%,var(--surface) 75%);background-size:200% 100%;animation:sh 1.2s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+
+footer{margin:64px 0 40px;padding-top:28px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--text-3);font-size:.82rem}
+footer a{color:var(--text-2)} footer a:hover{color:var(--accent)}
+.totop{position:fixed;right:22px;bottom:22px;width:42px;height:42px;border-radius:12px;border:1px solid var(--border-strong);background:color-mix(in srgb,var(--bg-2) 80%,transparent);backdrop-filter:blur(10px);display:grid;place-items:center;opacity:0;pointer-events:none;transition:.2s;z-index:30}
+.totop.show{opacity:1;pointer-events:auto}
+.totop svg{width:16px;height:16px;stroke:var(--text);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:640px){
+  .wrap{padding:0 16px} .hero{padding:36px 0 24px} .stat{min-width:0;flex:1;padding:12px 14px}
+  .nav-links a.hide-m{display:none} .toolbar{top:8px} .search kbd{display:none}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <h1>Awesome <span>DSH</span> Skills</h1>
-  <p class="tag">DeepSeek Harness 技能自动发现与实测榜单 · auto-discovered &amp; verified skills for dsh</p>
-  <div class="stats">
-    <div class="stat"><b id="s-total">–</b><span>skills tracked</span></div>
-    <div class="stat"><b id="s-verified">–</b><span>✅ SKILL.md verified</span></div>
-    <div class="stat"><b id="s-updated">–</b><span>last updated</span></div>
-  </div>
-  <div class="links">
-    <a href="https://github.com/yzfly/awesome-dsh-skills">GitHub 仓库</a>
-    <a href="https://github.com/yzfly/awesome-dsh-skills#contributing">提交技能</a>
-    <a href="https://github.com/deepseek-ai/deepseek-harness">DeepSeek Harness</a>
-  </div>
-</header>
+<div class="aurora"><div class="grid"></div><div class="p"></div></div>
 
-<div class="controls">
-  <div class="searchrow">
-    <input id="q" type="search" placeholder="搜索技能 / search skills…" autocomplete="off">
-    <select id="sort">
-      <option value="stars">按 Star 排序</option>
-      <option value="newest">最新创建</option>
-      <option value="updated">最近更新</option>
-    </select>
-    <select id="vfilter">
-      <option value="">全部状态</option>
-      <option value="yes">✅ 已验证</option>
-      <option value="partial">☑️ 部分验证</option>
-    </select>
+<div class="wrap">
+<nav>
+  <a class="brand" href="./">
+    <span class="logo"><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 11l-5.5 2.5L12 19l-2.5-5.5L4 11l5.5-2.5z"/></svg></span>
+    Awesome DSH Skills
+  </a>
+  <div class="nav-links">
+    <a class="hide-m" href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">DeepSeek Harness</a>
+    <a class="hide-m" href="https://github.com/yzfly/awesome-dsh-skills/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" data-i18n="submit">提交技能</a>
+    <a href="https://github.com/yzfly/awesome-dsh-skills" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+      GitHub
+    </a>
+    <span class="seg" id="lang"><button data-l="zh" class="on">中</button><button data-l="en">EN</button></span>
+    <button class="icon-btn" id="theme" title="Toggle theme" aria-label="Toggle theme">
+      <svg id="ico-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg id="ico-moon" viewBox="0 0 24 24" hidden><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<section class="hero">
+  <span class="eyebrow"><span class="dot"></span><span data-i18n="eyebrow">每日自动爬取 · 实测校验 · 持续更新</span></span>
+  <h1><span data-i18n="h1a">发现最好的</span> <span class="grad">DeepSeek Harness</span> <span data-i18n="h1b">技能</span></h1>
+  <p class="lead" data-i18n="lead">从 GitHub 自动发现、校验 SKILL.md 并分类的 dsh 技能榜单。按分类、Star、校验状态即时筛选。</p>
+  <div class="stats">
+    <div class="stat"><b id="s-total">–</b><span data-i18n="st-total">技能仓库</span></div>
+    <div class="stat ok"><b id="s-verified">–</b><span data-i18n="st-verified">✅ 校验通过</span></div>
+    <div class="stat"><b id="s-stars">–</b><span data-i18n="st-stars">Stars 总计</span></div>
+    <div class="stat"><b id="s-updated" style="font-size:1.15rem;padding-top:6px">–</b><span data-i18n="st-updated">最后更新</span></div>
+  </div>
+</section>
+
+<div class="toolbar">
+  <div class="row">
+    <label class="search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="搜索技能、仓库、关键词…" autocomplete="off" spellcheck="false">
+      <kbd>/</kbd>
+    </label>
+    <span class="select"><select id="sort">
+      <option value="stars" data-i18n="so-stars">按 Star 排序</option>
+      <option value="newest" data-i18n="so-new">最新创建</option>
+      <option value="updated" data-i18n="so-upd">最近更新</option>
+      <option value="name" data-i18n="so-name">按名称</option>
+    </select></span>
+    <span class="select"><select id="vfilter">
+      <option value="" data-i18n="vf-all">全部状态</option>
+      <option value="yes" data-i18n="vf-yes">✅ 已验证</option>
+      <option value="partial" data-i18n="vf-part">☑️ 部分验证</option>
+      <option value="no" data-i18n="vf-no">未找到 SKILL.md</option>
+    </select></span>
   </div>
   <div class="chips" id="chips"></div>
 </div>
 
-<div class="grid" id="grid"></div>
-<div class="empty" id="empty" hidden>没有匹配的技能 · no matching skills</div>
+<div class="meta-row"><span id="count"></span><span id="hint" data-i18n="hint">点击卡片跳转到 GitHub 仓库</span></div>
+<div class="grid" id="grid"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+<div class="empty" id="empty" hidden><b data-i18n="empty-t">没有匹配的技能</b><span data-i18n="empty-s">换个关键词或清除筛选试试</span></div>
+<div class="more" id="more" hidden><button id="more-btn"></button></div>
 
 <footer>
-  Data refreshed daily by GitHub Actions ·
-  <a href="https://github.com/yzfly/awesome-dsh-skills">yzfly/awesome-dsh-skills</a> · CC0-1.0
+  <span data-i18n="foot">数据由 GitHub Actions 每日刷新 · 收录不构成安全背书，安装前请审查源码</span>
+  <span><a href="https://github.com/yzfly/awesome-dsh-skills" target="_blank" rel="noopener">yzfly/awesome-dsh-skills</a> · CC0-1.0</span>
 </footer>
 </div>
 
-<script>
-let DATA=null, activeCat="";
-const $=id=>document.getElementById(id);
+<button class="totop" id="totop" aria-label="Back to top"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
+<script>
+const $=id=>document.getElementById(id);
+const I18N={
+  zh:{submit:"提交技能",eyebrow:"每日自动爬取 · 实测校验 · 持续更新",h1a:"发现最好的",h1b:"技能",
+      lead:"从 GitHub 自动发现、校验 SKILL.md 并分类的 dsh 技能榜单。按分类、Star、校验状态即时筛选。",
+      "st-total":"技能仓库","st-verified":"✅ 校验通过","st-stars":"Stars 总计","st-updated":"最后更新",
+      "so-stars":"按 Star 排序","so-new":"最新创建","so-upd":"最近更新","so-name":"按名称",
+      "vf-all":"全部状态","vf-yes":"✅ 已验证","vf-part":"☑️ 部分验证","vf-no":"未找到 SKILL.md",
+      hint:"点击卡片跳转到 GitHub 仓库","empty-t":"没有匹配的技能","empty-s":"换个关键词或清除筛选试试",
+      foot:"数据由 GitHub Actions 每日刷新 · 收录不构成安全背书，安装前请审查源码",
+      ph:"搜索技能、仓库、关键词…",all:"全部",count:(n,t)=>`显示 <b>${n}</b> / ${t} 个技能`,more:n=>`加载更多（剩余 ${n}）`,
+      verified:"已验证",partial:"部分验证",nodesc:"（暂无简介）",updated:"更新于"},
+  en:{submit:"Submit a skill",eyebrow:"Crawled daily · Verified · Always fresh",h1a:"Discover the best",h1b:"skills",
+      lead:"Auto-discovered, SKILL.md-verified and categorized skills for dsh. Filter instantly by category, stars and verification status.",
+      "st-total":"Skill repos","st-verified":"✅ Verified","st-stars":"Total stars","st-updated":"Last updated",
+      "so-stars":"Sort by stars","so-new":"Newest","so-upd":"Recently updated","so-name":"By name",
+      "vf-all":"All status","vf-yes":"✅ Verified","vf-part":"☑️ Partial","vf-no":"No SKILL.md found",
+      hint:"Click a card to open the GitHub repo","empty-t":"No matching skills","empty-s":"Try another keyword or clear filters",
+      foot:"Data refreshed daily by GitHub Actions · A listing is not a security endorsement — review the source before installing",
+      ph:"Search skills, repos, keywords…",all:"All",count:(n,t)=>`Showing <b>${n}</b> of ${t} skills`,more:n=>`Load more (${n} left)`,
+      verified:"verified",partial:"partial",nodesc:"(no description)",updated:"updated"}
+};
+let DATA=null, activeCat="", lang="zh", shown=0, list=[];
+const PAGE=48;
+try{lang=localStorage.getItem('dsh-lang')||(navigator.language.startsWith('zh')?'zh':'en');}catch(e){}
+
+/* ---- theme ---- */
+const root=document.documentElement;
+function applyTheme(t){root.dataset.theme=t;$('ico-sun').hidden=t==='light';$('ico-moon').hidden=t!=='light';try{localStorage.setItem('dsh-theme',t)}catch(e){}}
+(function(){let t='dark';try{t=localStorage.getItem('dsh-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}applyTheme(t);})();
+$('theme').onclick=()=>applyTheme(root.dataset.theme==='dark'?'light':'dark');
+
+/* ---- i18n ---- */
+function applyLang(){
+  const t=I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const v=t[el.dataset.i18n];if(typeof v==='string')el.textContent=v;});
+  $('q').placeholder=t.ph;
+  document.querySelectorAll('#lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===lang));
+  document.documentElement.lang=lang==='zh'?'zh-CN':'en';
+  try{localStorage.setItem('dsh-lang',lang)}catch(e){}
+  if(DATA){buildChips();render();}
+}
+$('lang').onclick=e=>{const b=e.target.closest('button');if(b&&b.dataset.l!==lang){lang=b.dataset.l;applyLang();}};
+
+/* ---- data ---- */
 fetch('data.json').then(r=>r.json()).then(d=>{
   DATA=d;
-  $('s-total').textContent=d.skills.length;
-  $('s-verified').textContent=d.skills.filter(s=>s.verified==='yes').length;
+  const total=d.skills.length, ver=d.skills.filter(s=>s.verified==='yes').length, stars=d.skills.reduce((a,s)=>a+(s.stars||0),0);
+  countUp($('s-total'),total);countUp($('s-verified'),ver);countUp($('s-stars'),stars);
   $('s-updated').textContent=d.updated;
-  const counts={};
-  d.skills.forEach(s=>counts[s.category]=(counts[s.category]||0)+1);
-  const chips=$('chips');
-  const all=document.createElement('span');
-  all.className='chip active'; all.textContent='全部 All'; all.onclick=()=>{activeCat='';setActive(all);render();};
-  chips.appendChild(all);
-  Object.entries(d.categories).forEach(([key,names])=>{
-    if(!counts[key])return;
-    const c=document.createElement('span');
-    c.className='chip'; c.textContent=`${names.zh} ${counts[key]}`;
-    c.onclick=()=>{activeCat=key;setActive(c);render();};
-    chips.appendChild(c);
-  });
-  render();
-}).catch(()=>{$('empty').hidden=false;$('empty').textContent='数据加载失败 · failed to load data.json';});
+  const p=new URLSearchParams(location.search);
+  if(p.get('q'))$('q').value=p.get('q'); if(p.get('cat'))activeCat=p.get('cat');
+  if(p.get('v'))$('vfilter').value=p.get('v'); if(p.get('sort'))$('sort').value=p.get('sort');
+  applyLang();
+}).catch(()=>{$('grid').innerHTML='';$('empty').hidden=false;$('empty').innerHTML='<b>数据加载失败 · failed to load data.json</b>';});
 
-function setActive(el){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');}
+function countUp(el,to){const t0=performance.now(),dur=900;const f=n=>{const p=Math.min(1,(n-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=Math.round(to*e).toLocaleString();if(p<1)requestAnimationFrame(f);};requestAnimationFrame(f);}
+
+function buildChips(){
+  const counts={};DATA.skills.forEach(s=>counts[s.category]=(counts[s.category]||0)+1);
+  const chips=$('chips');chips.innerHTML='';
+  const mk=(key,label,n)=>{const c=document.createElement('button');c.className='chip'+(activeCat===key?' on':'');c.innerHTML=`${esc(label)} <span class="n">${n}</span>`;c.onclick=()=>{activeCat=key;buildChips();render();};chips.appendChild(c);};
+  mk('',I18N[lang].all,DATA.skills.length);
+  Object.entries(DATA.categories).forEach(([k,n])=>{if(counts[k])mk(k,n[lang],counts[k]);});
+}
+
+function filter(){
+  const q=$('q').value.trim().toLowerCase(), vf=$('vfilter').value, sort=$('sort').value;
+  list=DATA.skills.filter(s=>(!activeCat||s.category===activeCat)&&(!vf||s.verified===vf)&&
+    (!q||(s.repo+' '+(s.description||'')+' '+(s.topics||[]).join(' ')).toLowerCase().includes(q)));
+  const by={stars:(a,b)=>b.stars-a.stars,newest:(a,b)=>(b.created_at||'').localeCompare(a.created_at||''),
+    updated:(a,b)=>(b.pushed_at||'').localeCompare(a.pushed_at||''),name:(a,b)=>a.repo.localeCompare(b.repo)};
+  list.sort(by[sort]||by.stars);
+  const p=new URLSearchParams();if(q)p.set('q',q);if(activeCat)p.set('cat',activeCat);if(vf)p.set('v',vf);if(sort!=='stars')p.set('sort',sort);
+  history.replaceState(null,'',p.toString()?'?'+p:location.pathname);
+}
 
 function render(){
-  const q=$('q').value.trim().toLowerCase();
-  const vf=$('vfilter').value;
-  const sort=$('sort').value;
-  let list=DATA.skills.filter(s=>
-    (!activeCat||s.category===activeCat)&&
-    (!vf||s.verified===vf)&&
-    (!q||(s.repo+' '+s.description+' '+(s.topics||[]).join(' ')).toLowerCase().includes(q))
-  );
-  if(sort==='stars')list.sort((a,b)=>b.stars-a.stars);
-  if(sort==='newest')list.sort((a,b)=>(b.created_at||'').localeCompare(a.created_at||''));
-  if(sort==='updated')list.sort((a,b)=>(b.pushed_at||'').localeCompare(a.pushed_at||''));
-  const grid=$('grid');
-  grid.innerHTML='';
+  filter();shown=0;$('grid').innerHTML='';
   $('empty').hidden=list.length>0;
-  const frag=document.createDocumentFragment();
-  list.forEach(s=>{
-    const card=document.createElement('div');card.className='card';
-    const vbadge=s.verified==='yes'?'<span class="badge ok">✅ verified</span>':s.verified==='partial'?'<span class="badge partial">☑️ partial</span>':'';
-    const catName=(DATA.categories[s.category]||{}).zh||s.category;
-    card.innerHTML=`
-      <div class="top">
-        <a class="name" target="_blank" rel="noopener" href="https://github.com/${s.repo}">${s.repo}</a>
-        <span class="stars">⭐ ${s.stars}</span>
-      </div>
-      <p>${escapeHtml(s.description||'(no description)')}</p>
-      <div class="meta"><span class="badge">${catName}</span>${vbadge}</div>`;
-    frag.appendChild(card);
-  });
-  grid.appendChild(frag);
+  appendPage();
 }
-function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-$('q').addEventListener('input',render);
-$('sort').addEventListener('change',render);
-$('vfilter').addEventListener('change',render);
+function appendPage(){
+  const t=I18N[lang], frag=document.createDocumentFragment(), end=Math.min(list.length,shown+PAGE);
+  for(let i=shown;i<end;i++)frag.appendChild(card(list[i],i-shown));
+  $('grid').appendChild(frag);shown=end;
+  $('count').innerHTML=t.count(shown,list.length);
+  $('more').hidden=shown>=list.length;$('more-btn').textContent=t.more(list.length-shown);
+}
+$('more-btn').onclick=appendPage;
+
+function card(s,i){
+  const t=I18N[lang], [owner,name]=s.repo.split('/');
+  const a=document.createElement('a');a.className='card';a.href=`https://github.com/${s.repo}`;a.target='_blank';a.rel='noopener';a.style.animationDelay=Math.min(i,12)*25+'ms';
+  const v=s.verified==='yes'?`<span class="tag ok">✅ ${t.verified}</span>`:s.verified==='partial'?`<span class="tag partial">☑️ ${t.partial}</span>`:'';
+  const cat=(DATA.categories[s.category]||{})[lang]||s.category;
+  const when=s.pushed_at?`<span class="time">${t.updated} ${s.pushed_at.slice(0,10)}</span>`:'';
+  a.innerHTML=`<div class="head">
+      <img class="avatar" loading="lazy" alt="" src="https://github.com/${esc(owner)}.png?size=72">
+      <div class="title"><div class="owner">${esc(owner)}</div><span class="name">${esc(name)}</span></div>
+      <span class="stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.7 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg>${(s.stars||0).toLocaleString()}</span>
+    </div>
+    <p>${esc(s.description||t.nodesc)}</p>
+    <div class="foot"><div class="tags"><span class="tag">${esc(cat)}</span>${v}</div>${when}</div>`;
+  return a;
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+let deb;$('q').addEventListener('input',()=>{clearTimeout(deb);deb=setTimeout(render,120);});
+$('sort').addEventListener('change',render);$('vfilter').addEventListener('change',render);
+document.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement!==$('q')){e.preventDefault();$('q').focus();}if(e.key==='Escape'&&document.activeElement===$('q')){$('q').value='';render();}});
+addEventListener('scroll',()=>$('totop').classList.toggle('show',scrollY>600),{passive:true});
+$('totop').onclick=()=>scrollTo({top:0,behavior:'smooth'});
 </script>
 </body>
 </html>
