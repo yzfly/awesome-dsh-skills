@@ -24,6 +24,7 @@
 - 候选来自 GitHub topic（`dsh-skill` 等）与全文搜索的每日爬取，欢迎 PR 自荐（见 [CONTRIBUTING](CONTRIBUTING.md)）。
 - 描述文字取自各仓库自己的 GitHub 简介，不做转载。
 - ✅ = 仓库中找到 SKILL.md 且 frontmatter（name/description）合法，可被 dsh 加载；☑️ = 找到 SKILL.md 但 frontmatter 不完整；无标记 = 未在常规路径找到 SKILL.md（可能是特殊布局，欢迎 PR 修正）。
+- 想要更强的质量信号？用 `dsh-skill-lint` 按 [DSH Skill 规范](https://github.com/yzfly/dsh-skill-lint/blob/main/SPEC.zh.md) 检查你的技能——它会发现缺失的触发语、失效引用、泄露的密钥和不安全的 shell 模式。
 - 收录不代表安全背书：技能会驱动 agent 在你机器上执行操作，安装前请自行审查源码。
 
 ## 目录
@@ -823,6 +824,14 @@ Listed here? Add the badge to your README — [![Listed on Awesome DSH Skills](h
 ```
 
 Brand assets and usage: [BRAND.md](BRAND.md).
+
+## Specification
+
+The ✅ mark is the core check of the [DSH Skill Specification](https://github.com/yzfly/dsh-skill-lint/blob/main/SPEC.md) (frontmatter with valid `name` and `description`). Run the full linter on your own skill:
+
+```bash
+pip install git+https://github.com/yzfly/dsh-skill-lint && dsh-skill-lint
+```
 
 ## License
 
