@@ -24,7 +24,7 @@
 - Candidates are crawled daily from GitHub topics (`dsh-skill`, …) and full-text search; PRs welcome ([CONTRIBUTING](CONTRIBUTING.md)).
 - Descriptions come from each repo's own GitHub description — never copied from other lists.
 - ✅ = a SKILL.md with valid frontmatter (name/description) was found, so dsh can load it; ☑️ = SKILL.md found but frontmatter incomplete; no mark = no SKILL.md found in common layouts (may be a custom layout — PRs welcome).
-- Want a stronger signal? Check your skill against the [DSH Skill Specification](https://github.com/yzfly/dsh-skill-lint/blob/main/SPEC.md) with `dsh-skill-lint` — it catches missing trigger clauses, broken references, leaked secrets and unsafe shell patterns.
+- Want a stronger signal? Check your skill against the [DSH Skill Specification](SPEC.md) with [`dsh-skill-lint`](LINT.md) — it catches missing trigger clauses, broken references, leaked secrets and unsafe shell patterns.
 - A listing is not a security endorsement: skills drive an agent that acts on your machine. Review the source before installing.
 
 ## Contents
@@ -827,10 +827,10 @@ Brand assets and usage: [BRAND.md](BRAND.md).
 
 ## Specification
 
-The ✅ mark is the core check of the [DSH Skill Specification](https://github.com/yzfly/dsh-skill-lint/blob/main/SPEC.md) (frontmatter with valid `name` and `description`). Run the full linter on your own skill:
+The ✅ mark is the core check of the [DSH Skill Specification](SPEC.md) (frontmatter with valid `name` and `description`). Run the full linter on your own skill (docs: [LINT.md](LINT.md)):
 
 ```bash
-pip install git+https://github.com/yzfly/dsh-skill-lint && dsh-skill-lint
+pip install git+https://github.com/yzfly/awesome-dsh-skills && dsh-skill-lint
 ```
 
 ## License

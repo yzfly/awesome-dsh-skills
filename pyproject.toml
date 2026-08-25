@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dsh-skill-lint"
+version = "0.1.0"
+description = "Lint SKILL.md files against the DSH Skill Specification."
+readme = "LINT.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "yzfly" }]
+keywords = ["deepseek-harness", "dsh", "skills", "agent-skills", "lint"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.urls]
+Homepage = "https://github.com/yzfly/awesome-dsh-skills"
+Documentation = "https://github.com/yzfly/awesome-dsh-skills/blob/main/LINT.md"
+Specification = "SPEC.md"
+"Skill directory" = "https://code.jiangshu.ai/awesome-dsh-skills"
+
+[project.scripts]
+dsh-skill-lint = "dsh_skill_lint.cli:main"
+
+[tool.setuptools]
+packages = ["dsh_skill_lint"]

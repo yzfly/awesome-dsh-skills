@@ -1,0 +1,19 @@
+name: "dsh-skill-lint"
+description: "Check SKILL.md files against the DSH Skill Specification"
+branding:
+  icon: "check-circle"
+  color: "blue"
+inputs:
+  path:
+    description: "File or directory to scan"
+    default: "."
+  strict:
+    description: "Fail on warnings too"
+    default: "false"
+runs:
+  using: "composite"
+  steps:
+    - run: pip install --quiet "git+https://github.com/yzfly/awesome-dsh-skills@main"
+      shell: bash
+    - run: dsh-skill-lint "${{ inputs.path }}" --format github $([ "${{ inputs.strict }}" = "true" ] && echo --strict)
+      shell: bash
