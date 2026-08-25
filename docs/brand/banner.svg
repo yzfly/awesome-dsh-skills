@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-label="Awesome DSH Skills — 713 skills, 385 verified">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-label="Awesome DSH Skills — 731 skills, 390 verified">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c8cff"/><stop offset=".55" stop-color="#38d4ff"/><stop offset="1" stop-color="#c084fc"/></linearGradient>
     <radialGradient id="a1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(160 40) scale(420)"><stop offset="0" stop-color="#7c8cff" stop-opacity=".55"/><stop offset="1" stop-color="#7c8cff" stop-opacity="0"/></radialGradient>
@@ -23,10 +23,10 @@
   <text x="74" y="184" font-family="Inter,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#aab3c7">Auto-discovered, verified and categorized skills for DeepSeek Harness.</text>
   <g font-family="Inter,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="1.2">
     <rect x="72" y="214" width="150" height="40" rx="10" fill="#fff" fill-opacity=".04" stroke="#fff" stroke-opacity=".1"/>
-    <text x="88" y="240" fill="#eef1f8" font-size="18" font-weight="800" letter-spacing="-.5">713</text>
+    <text x="88" y="240" fill="#eef1f8" font-size="18" font-weight="800" letter-spacing="-.5">731</text>
     <text x="130" y="239" fill="#6f7a93">SKILLS</text>
     <rect x="234" y="214" width="166" height="40" rx="10" fill="#fff" fill-opacity=".04" stroke="#fff" stroke-opacity=".1"/>
-    <text x="250" y="240" fill="#34d399" font-size="18" font-weight="800" letter-spacing="-.5">385</text>
+    <text x="250" y="240" fill="#34d399" font-size="18" font-weight="800" letter-spacing="-.5">390</text>
     <text x="292" y="239" fill="#6f7a93">VERIFIED</text>
     <rect x="412" y="214" width="200" height="40" rx="10" fill="#fff" fill-opacity=".04" stroke="#fff" stroke-opacity=".1"/>
     <text x="428" y="239" fill="#6f7a93">UPDATED</text>
