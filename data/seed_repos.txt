@@ -63,6 +63,7 @@ linxichen/dsh-rigorquant
 lunw/shopline-ai-toolkit-dsh
 mjylfz/dsh-skill-mover
 mudden2380078550-creator/write-chinese-long-screenplay
+po-et/dsh-sheet-diff
 redfox-data/redfox-community-dsh
 sandbaseai/sandbase-skills
 songoao25/dsh-contract-drafting-agent
