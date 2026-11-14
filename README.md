@@ -15,7 +15,7 @@
 
 > Auto-discovered & verified skills for [DeepSeek Harness (dsh)](https://github.com/deepseek-ai/deepseek-harness).
 
-**1304** skill repos tracked · **793** passed SKILL.md validation · updated daily (last: 2026-11-14)
+**1303** skill repos tracked · **792** passed SKILL.md validation · updated daily (last: 2026-11-13)
 
 🔎 **Searchable site: https://code.jiangshu.ai/awesome-dsh-skills** — filter by category, stars, and verification status.
 
@@ -38,7 +38,7 @@
 - [🔍 Research & Knowledge](#-research--knowledge) (79)
 - [🎨 Design & Media](#-design--media) (86)
 - [🌐 Web & Automation](#-web--automation) (81)
-- [🤖 Agents & Orchestration](#-agents--orchestration) (283)
+- [🤖 Agents & Orchestration](#-agents--orchestration) (282)
 - [🎓 Education & Competitions](#-education--competitions) (6)
 - [🎮 Fun & Lifestyle](#-fun--lifestyle) (6)
 - [🧰 Other Skills](#-other-skills) (174)
@@ -1102,7 +1102,6 @@
 | [pwangxo-sg/financial-market-analysis](https://github.com/pwangxo-sg/financial-market-analysis) | – | ✅ | DeepSeek Harness 金融市场分析技能：A股/基金/QDII/黄金/亚太指数日报、指标追踪、决策追踪（可配置，零个人硬编码） |
 | [33moren33/dsh-slice-bench](https://github.com/33moren33/dsh-slice-bench) | – | ✅ | 把插件放进一台真起来的最小 DSH 机器，让 harness 自己说它站不站得住 · Runtime bench for DSH plugin version conflicts — the harness gives the verdict, not us |
 | [ranxiao0218-afk/code-tutor-dsh](https://github.com/ranxiao0218-afk/code-tutor-dsh) | – |  | DeepSeek Harness plugin: a code-explanation skill that answers in three concise parts - what the code does, the syntax it uses, then a line-by-line walkthrough. |
-| [ZTYZZ/novel-to-faithful-script](https://github.com/ZTYZZ/novel-to-faithful-script) | – | ✅ | 小说改编漫剧/短剧剧本的 Agent Skill：保核心事实，调卡点，支持分季与 1 分钟拆集。 |
 | [Zok66/dsh-nuwa](https://github.com/Zok66/dsh-nuwa) | – | ✅ | 花叔「女娲 · Skill 造人术」dsh 插件封装：蒸馏任意人的思维方式为可运行的人物 Skill |
 | [zhong-1212/dsh-plugins](https://github.com/zhong-1212/dsh-plugins) | – |  | DeepSeek Harness (DSH) third-party plugins. Each plugin lives in plugins/<name>/ and installs independently. |
 | [SUJIElearning/zhaoyu-restart](https://github.com/SUJIElearning/zhaoyu-restart) | – |  | One-click silent DSH restart button for DeepSeek Harness (dsh-plugin) |

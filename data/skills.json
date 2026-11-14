@@ -21632,30 +21632,6 @@
     "skill_files": []
   },
   {
-    "repo": "ZTYZZ/novel-to-faithful-script",
-    "description": "小说改编漫剧/短剧剧本的 Agent Skill：保核心事实，调卡点，支持分季与 1 分钟拆集。",
-    "stars": 1,
-    "topics": [
-      "agent-skill",
-      "antigravity",
-      "claude-code",
-      "codex",
-      "deepseek-harness",
-      "novel-adaptation",
-      "screenwriting",
-      "short-drama"
-    ],
-    "default_branch": "main",
-    "created_at": "2026-11-07T02:18:43Z",
-    "pushed_at": "2026-11-07T02:19:04Z",
-    "homepage": "",
-    "license": "MIT",
-    "verified": "yes",
-    "skill_files": [
-      "SKILL.md"
-    ]
-  },
-  {
     "repo": "Lohaslee/dsh-super-pm",
     "description": "Super PM product-thinking skill packaged as a DeepSeek Harness plugin",
     "stars": 1,

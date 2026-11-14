@@ -56,6 +56,18 @@ def api(url: str):
         return None
 
 
+def repo_gone(repo: str) -> bool:
+    """True only when GitHub confirms the repo no longer exists (404/451)."""
+    req = urllib.request.Request(f"https://api.github.com/repos/{repo}", headers=API_HEADERS)
+    try:
+        with urllib.request.urlopen(req, timeout=30):
+            return False
+    except urllib.error.HTTPError as e:
+        return e.code in (404, 451)
+    except Exception:
+        return False
+
+
 def raw(repo: str, branch: str, path: str) -> str | None:
     url = f"https://raw.githubusercontent.com/{repo}/{branch}/{path}"
     req = urllib.request.Request(url, headers={"User-Agent": API_HEADERS["User-Agent"]})
@@ -115,6 +127,10 @@ def main() -> None:
     results = []
     for i, cand in enumerate(candidates):
         repo, branch = cand["repo"], cand["default_branch"]
+        if repo_gone(repo):
+            # search results can lag behind repo deletion; never list a dead repo
+            print(f"  drop {repo}: repository no longer exists")
+            continue
         entry = dict(cand)
         ov = overrides.get(repo, {})
         if "verified" in ov:
