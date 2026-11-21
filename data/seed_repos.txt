@@ -1,6 +1,7 @@
 7dgroup-ai/dsh-skill-7d-code-reviewer
 863683348/dsh-starter-zh
 Andiii208/dsh-ultramath
+AnesthesiaAsf/deepseek-prompt-skill
 Cavan-Ou/hermes-dsh-collab
 Chu-Xin-r/wanjiqi-meme
 Crayonnan/dsh-math-modeling-skills-Gatecraft-
