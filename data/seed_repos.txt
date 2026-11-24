@@ -28,6 +28,7 @@ YuanyuanMa03/cot-lint
 Zenjibad/skill-injector-plugin
 ZihaoVistonWang/Stata-AI-Skill
 akqwpeter-prog/skill-bartender
+azeemkafridi/bulkpublish-ai-toolkit
 cheshireez/dsh-skill-hub
 creght-dev/skills
 dataelement/dsh-plugin-coaligne
